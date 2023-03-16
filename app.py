@@ -44,7 +44,7 @@ def handle_message(event):
         stop=None,
         temperature=0.7,
     )
-    completed_text = response.choices[0].text.strip()
+    completed_text = response.choices[0].text
 
     # Send To Line
     #reply = TextSendMessage(text=f"{get_message}")
