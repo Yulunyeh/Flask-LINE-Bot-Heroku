@@ -35,11 +35,10 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    get_message = event.message.text
     
     response = openai.Completion.create(
         engine="text-davinci-003",
-        prompt=get_message,
+        prompt=event.message.text,
         max_tokens=150,
         n=1,
         stop=None,
@@ -51,7 +50,7 @@ def handle_message(event):
     # Reply the text to client
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=completed_text ))
+        TextSendMessage(text=f"{completed_text}" ))
 
 
     # Send To Line
