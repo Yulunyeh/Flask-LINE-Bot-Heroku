@@ -67,3 +67,5 @@ def handle_message(event):
     #reply = TextSendMessage(text=f"{get_message}")
     #reply = TextSendMessage(text=f"{completed_text}")
     #line_bot_api.reply_message(event.reply_token, reply)
+if __name__ == "__main__":
+    app.run()
