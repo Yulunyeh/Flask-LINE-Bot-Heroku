@@ -38,7 +38,7 @@ def handle_message(event):
     
     response = openai.Completion.create(
         engine="davinci-codex",
-        prompt=prompt,
+        prompt=get_message,
         max_tokens=150,
         n=1,
         stop=None,
