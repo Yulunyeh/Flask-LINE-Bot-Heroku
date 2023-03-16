@@ -37,7 +37,7 @@ def handle_message(event):
     get_message = event.message.text
     
     response = openai.Completion.create(
-        engine="davinci-codex",
+        engine="text-davinci-003",
         prompt=get_message,
         max_tokens=150,
         n=1,
@@ -48,5 +48,5 @@ def handle_message(event):
 
     # Send To Line
     #reply = TextSendMessage(text=f"{get_message}")
-    reply = TextSendMessage(text=completed_text)
+    reply = TextSendMessage(text=f"{completed_text}")
     line_bot_api.reply_message(event.reply_token, reply)
