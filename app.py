@@ -45,27 +45,17 @@ def handle_message(event):
         stop=None,
         temperature=0.7,
     )
-    completed_text = requests.post(
-        CHATGPT_URL,
-        headers={
-            'Content-Type': 'application/json',
-            'Authorization': " ".join(["Bearer", OPENAI_KEY])
-        },
-        json=data)
+    completed_text = response.choices[0].text
 
-    res_json = response.json()
-    reply_text = res_json.get("choices")[0].get(
-        "text").replace("\n", "").replace("?", "")
         
     # Reply the text to client
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=reply_text))
+        TextSendMessage(text=completed_text ))
 
 
     # Send To Line
     #reply = TextSendMessage(text=f"{get_message}")
     #reply = TextSendMessage(text=f"{completed_text}")
     #line_bot_api.reply_message(event.reply_token, reply)
-if __name__ == "__main__":
-    app.run()
+
