@@ -1,6 +1,6 @@
 import os
 import openai
-import requests
+
 from datetime import datetime
 
 from flask import Flask, abort, request
