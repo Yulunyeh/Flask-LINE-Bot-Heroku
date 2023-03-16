@@ -37,12 +37,14 @@ def handle_message(event):
     get_message = event.message.text
     
     response = openai.Completion.create(
-        engine="text-davinci-003",
-        prompt= get_message,
-        max_tokens=512,
-        temperature=0.5,
+        engine="davinci-codex",
+        prompt=prompt,
+        max_tokens=150,
+        n=1,
+        stop=None,
+        temperature=0.7,
     )
-    completed_text = response["choices"][0]["text"]
+    completed_text = response.choices[0].text.strip()
 
     # Send To Line
     #reply = TextSendMessage(text=f"{get_message}")
