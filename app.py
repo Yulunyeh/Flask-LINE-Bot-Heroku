@@ -48,10 +48,17 @@ def handle_message(event):
 
         
     # Reply the text to client
+    def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=f"{completed_text}" ))
-        return (completed_text+"br")
+        TextSendMessage(text=event.message.text)) 
+     return (completed_text+"br")
+    
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text=f"{completed_text}" )
+    return (completed_text+"br")
+    
 
 
     # Send To Line
