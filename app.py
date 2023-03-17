@@ -51,6 +51,7 @@ def handle_message(event):
         event.reply_token,
         TextSendMessage(text=completed_text)
     )
+    return prompt
     return completed_text
 
 if __name__ == "__main__":
