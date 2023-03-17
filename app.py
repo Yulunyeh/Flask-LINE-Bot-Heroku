@@ -44,14 +44,24 @@ def handle_message(event):
         stop=None,
         temperature=0.7,
     )
-    completed_text = response.choices[0].text
+    completed_text = response.choices[0].text.strip()
 
-        
+     # Send the response back to the user
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text=completed_text)
+    )
+
+if __name__ == "__main__":
+    app.run()
+    
+    
+    
     # Reply the text to client
-    def handle_message(event):
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=event.message.text)) 
+    #def handle_message(event):
+    #    line_bot_api.reply_message(
+    #        event.reply_token,
+    #        TextSendMessage(text=event.message.text)) 
     
 
     # Send To Line
