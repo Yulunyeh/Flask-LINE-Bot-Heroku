@@ -1,6 +1,4 @@
 import os
-import openai
-
 from datetime import datetime
 
 from flask import Flask, abort, request
@@ -14,7 +12,7 @@ app = Flask(__name__)
 
 line_bot_api = LineBotApi(os.environ.get("CHANNEL_ACCESS_TOKEN"))
 handler = WebhookHandler(os.environ.get("CHANNEL_SECRET"))
-openai.api_key = "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"
+
 
 @app.route("/", methods=["GET", "POST"])
 def callback():
@@ -35,39 +33,8 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    
-    response = openai.Completion.create(
-        engine="text-davinci-003",
-        prompt=event.message.text,
-        max_tokens=150,
-        n=1,
-        stop=None,
-        temperature=0.7,
-    )
-    completed_text = response.choices[0].text.strip()
-
-     # Send the response back to the user
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=completed_text)
-    )
-    return prompt
-    return completed_text
-
-if __name__ == "__main__":
-    app.run()
-    
-    
-    
-    # Reply the text to client
-    #def handle_message(event):
-    #    line_bot_api.reply_message(
-    #        event.reply_token,
-    #        TextSendMessage(text=event.message.text)) 
-    
+    get_message = event.message.text
 
     # Send To Line
-    #reply = TextSendMessage(text=f"{get_message}")
-    #reply = TextSendMessage(text=f"{completed_text}")
-    #line_bot_api.reply_message(event.reply_token, reply)
-
+    reply = TextSendMessage(text=f"{get_message}")
+    line_bot_api.reply_message(event.reply_token, reply)
